@@ -1,14 +1,14 @@
 import {useState} from "react";
-import Counter from "./components/Counter";
+import ClassCounter from "./components/ClassCounter";
 
 function App() {
-const [value, setValue]=useState('text inside input')
+    const [value, setValue] = useState('text inside input')
 
-  return (
-    <div className="App">
-      <Counter/>
-    </div>
-  );
+    return (
+        <div className="App">
+            <ClassCounter/>
+        </div>
+    );
 }
 
 export default App;
