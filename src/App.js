@@ -15,6 +15,7 @@ function App() {
     const addNewPost = (e) => {
         e.preventDefault()
        const newPost={
+            id:Date.now(),
            title,
            body
        }
