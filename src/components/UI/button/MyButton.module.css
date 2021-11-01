@@ -3,6 +3,11 @@
     color: darkturquoise;
     font-size: 16px;
     background: transparent;
-    border: 2px solid darkturquoise;
+    border: 1px solid darkturquoise;
     cursor: pointer;
+}
+
+.myBtn:disabled {
+    border: 3px solid red;
+    opacity: 0.2;
 }

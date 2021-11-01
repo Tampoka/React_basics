@@ -2,6 +2,7 @@ import {useState} from "react";
 import "./styles/App.css"
 import PostsList from "./components/PostsList";
 import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
 
 function App() {
     const [posts, setPosts] = useState([{id:1, title:"Higher Order Functions in javascript.",body:"description"},
@@ -11,8 +12,8 @@ function App() {
     return (
         <div className="App">
             <form>
-                <input type="text" placeholder="Post title"/>
-                <input type="text" placeholder="Post description"/>
+                <MyInput placeholder="Post title"/>
+                <MyInput placeholder="Post description"/>
                 <MyButton disabled>Add post</MyButton>
             </form>
         <PostsList posts={posts} title="Posts List 1"/>
