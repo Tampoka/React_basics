@@ -1,5 +1,5 @@
 import {useState} from "react";
-
+import  "./styles/App.css"
 function App() {
     const [value, setValue] = useState('text inside input')
 
@@ -11,9 +11,9 @@ function App() {
                     <div>Functions that operate on other functions, either by taking them as arguments or by returning them, are called higher-order functions.
                         Higher order functions are a result of functions being first-class citizens in javascript.</div>
                 </div>
-            </div>
             <div className="post__btns">
                 <button>Delete</button>
+            </div>
             </div>
         </div>
     );
