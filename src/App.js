@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useState} from "react";
 import "./styles/App.css"
 import PostsList from "./components/PostsList";
 import MyButton from "./components/UI/button/MyButton";
@@ -10,12 +10,15 @@ function App() {
         {id: 3, title: "What is Currying in javascript?"}])
 
     const [title, setTitle] = useState('')
-
-    const bodyInputRef = useRef()
+    const [body, setBody] = useState('')
 
     const addNewPost = (e) => {
         e.preventDefault()
-        console.log(bodyInputRef.current.value)
+       const newPost={
+           title,
+           body
+       }
+        console.log(newPost)
     }
     return (
         <div className="App">
@@ -26,7 +29,8 @@ function App() {
                     type="text"
                     placeholder="Post title"/>
                 <MyInput
-                    ref={bodyInputRef}
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
                     type=" text"
                     placeholder="Post description"/>
                 <MyButton onClick={addNewPost}>Add post</MyButton>
