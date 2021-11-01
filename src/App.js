@@ -1,6 +1,6 @@
 import {useState} from "react";
 import "./styles/App.css"
-import PostItem from "./components/PostItem";
+import PostsList from "./components/PostsList";
 
 function App() {
     const [posts, setPosts] = useState([{id:1, title:"Higher Order Functions in javascript.",body:"description"},
@@ -9,7 +9,7 @@ function App() {
 
     return (
         <div className="App">
-            {posts.map(post=><PostItem key={post.id} post={post}/>)}
+        <PostsList posts={posts} title="Posts List 1"/>
         </div>
     );
 }
