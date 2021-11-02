@@ -39,13 +39,9 @@ function App() {
             <PostFilter
                 setFilter={setFilter}
                 filter={filter}/>
-            {
-                sortedAndSearchedPosts.length > 0
-                    ? <PostsList posts={sortedAndSearchedPosts}
-                                 title="Posts List 1"
-                                 remove={removePost}/>
-                    : <h2 style={{textAlign: 'center'}}>Posts were not found!</h2>
-            }
+            <PostsList posts={sortedAndSearchedPosts}
+                       title="Posts List 1"
+                       remove={removePost}/>
         </div>
     );
 }
