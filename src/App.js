@@ -1,8 +1,6 @@
 import {useState} from "react";
 import "./styles/App.css"
 import PostsList from "./components/PostsList";
-import MyButton from "./components/UI/button/MyButton";
-import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
 
 function App() {
@@ -10,14 +8,12 @@ function App() {
         {id: 2, title: "What is an Immediately Invoked Function in javascript?", body: "description"},
         {id: 3, title: "What is Currying in javascript?"}])
 
-    const addNewPost = (e) => {
-        e.preventDefault()
-        setPosts([...posts, {...post, id: Date.now()}])
-        setPost({title: '', body: ''})
+    const createPost = (newPost) => {
+        setPosts([...posts, newPost])
     }
     return (
         <div className="App">
-            <PostForm/>
+            <PostForm create={createPost}/>
             <PostsList posts={posts} title="Posts List 1"/>
         </div>
     );
