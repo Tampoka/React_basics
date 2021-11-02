@@ -3,6 +3,7 @@ import "./styles/App.css"
 import PostsList from "./components/PostsList";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/select/MySelect";
+import MyInput from "./components/UI/input/MyInput";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -10,6 +11,9 @@ function App() {
         {id: 3, title: "What is Currying in javascript?", body: "dfsffs"}])
 
     const [selectedSort, setSelectedSort] = useState('')
+    const [searchQuery, setSearchQuery] = useState('')
+
+    const sortedPosts=[...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -21,13 +25,17 @@ function App() {
 
     const sortPosts = (sort) => {
         setSelectedSort(sort)
-        setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
     }
     return (
         <div className="App">
             <PostForm create={createPost}/>
             <hr style={{margin: '15px 0'}}/>
             <div>
+                <MyInput
+                    value={searchQuery}
+                    onChange={e=>setSearchQuery(e.target.value)}
+                    placeholder="Search"
+                />
                 <MySelect label="Filter by"
                           value={selectedSort}
                           onChange={sortPosts}
@@ -37,7 +45,7 @@ function App() {
             </div>
             {
                 posts.length > 0
-                    ? <PostsList posts={posts}
+                    ? <PostsList posts={sortedPosts}
                                  title="Posts List 1"
                                  remove={removePost}/>
                     : <h2 style={{textAlign: 'center'}}>Posts were not found!</h2>
