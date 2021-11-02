@@ -3,6 +3,7 @@ import "./styles/App.css"
 import PostsList from "./components/PostsList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/modal/MyModal";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -34,6 +35,9 @@ function App() {
 
     return (
         <div className="App">
+            <MyModal>
+
+            </MyModal>
             <PostForm create={createPost}/>
             <hr style={{margin: '15px 0'}}/>
             <PostFilter
