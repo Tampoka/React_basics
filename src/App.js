@@ -6,7 +6,7 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/modal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./hooks/usePosts";
-import axios from "axios";
+import PostService from "./API/PostService";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -16,6 +16,7 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const sortedAndSearchedPosts=usePosts(posts,filter.sort, filter.query)
+    const [isPostsLoading, setPostsIsLoading]=useState(false)
 
     useEffect(()=>{
         fetchPosts()
@@ -27,8 +28,10 @@ function App() {
     }
 
     async function fetchPosts() {
-        const response=await axios.get('https://jsonplaceholder.typicode.com/posts')
-        setPosts(response.data)
+        setPostsIsLoading(true)
+        const posts=await PostService.getAll()
+        setPosts(posts)
+        setPostsIsLoading(false)
     }
 
     const removePost = (post) => {
@@ -48,9 +51,12 @@ function App() {
             <PostFilter
                 setFilter={setFilter}
                 filter={filter}/>
-            <PostsList posts={sortedAndSearchedPosts}
+            {isPostsLoading
+            ?<h1>LOADING...</h1>
+            : <PostsList posts={sortedAndSearchedPosts}
                        title="Posts List 1"
                        remove={removePost}/>
+            }
         </div>
     );
 }
