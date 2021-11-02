@@ -25,6 +25,10 @@ function App() {
         setPosts([...posts, newPost])
     }
 
+    const sortedAndSearchedPosts=useMemo(()=>{
+    return sortedPosts.filter(post=>post.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    },[searchQuery,sortedPosts])
+
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     }
@@ -50,8 +54,8 @@ function App() {
                               {value: 'body', name: 'Description'}]}/>
             </div>
             {
-                posts.length > 0
-                    ? <PostsList posts={sortedPosts}
+                sortedAndSearchedPosts.length > 0
+                    ? <PostsList posts={sortedAndSearchedPosts}
                                  title="Posts List 1"
                                  remove={removePost}/>
                     : <h2 style={{textAlign: 'center'}}>Posts were not found!</h2>
