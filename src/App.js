@@ -2,6 +2,7 @@ import {useState} from "react";
 import "./styles/App.css"
 import PostsList from "./components/PostsList";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/select/MySelect";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -18,12 +19,18 @@ function App() {
     return (
         <div className="App">
             <PostForm create={createPost}/>
+            <hr style={{margin: '15px 0'}}/>
+            <div>
+                <MySelect defaultValue={'Filter by'}
+                options={[{value: 'title', name: 'Title'},
+                    {value: 'body', name: 'Description'}]}/>
+            </div>
             {
                 posts.length > 0
                     ? <PostsList posts={posts}
                                  title="Posts List 1"
                                  remove={removePost}/>
-                    : <h2 style={{textAlign:'center'}}>Posts were not found!</h2>
+                    : <h2 style={{textAlign: 'center'}}>Posts were not found!</h2>
             }
         </div>
     );
