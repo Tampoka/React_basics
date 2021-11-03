@@ -7,6 +7,7 @@ import MyModal from "./components/UI/modal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./hooks/usePosts";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/loader/Loader";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -54,7 +55,9 @@ function App() {
                 setFilter={setFilter}
                 filter={filter}/>
             {isPostsLoading
-                ? <h1>LOADING...</h1>
+                ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}>
+                    <Loader/>
+                </div>
                 : <PostsList posts={sortedAndSearchedPosts}
                              title="Posts List 1"
                              remove={removePost}/>
