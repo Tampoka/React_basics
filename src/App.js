@@ -8,6 +8,7 @@ import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./hooks/usePosts";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/loader/Loader";
+import {useFetching} from "./hooks/useFetching";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
@@ -17,7 +18,10 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
-    const [isPostsLoading, setPostsIsLoading] = useState(false)
+    const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+        const posts = await PostService.getAll()
+        setPosts(posts)
+    })
 
     useEffect(() => {
         fetchPosts()
@@ -28,14 +32,6 @@ function App() {
         setModal(false)
     }
 
-    async function fetchPosts() {
-        setPostsIsLoading(true)
-        setTimeout(async () => {
-            const posts = await PostService.getAll()
-            setPosts(posts)
-            setPostsIsLoading(false)
-        }, 1000)
-    }
 
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
@@ -54,6 +50,8 @@ function App() {
             <PostFilter
                 setFilter={setFilter}
                 filter={filter}/>
+            {postError &&
+            <h2>ERROR ${postError}</h2>}
             {isPostsLoading
                 ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}>
                     <Loader/>
