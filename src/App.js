@@ -11,10 +11,7 @@ import Loader from "./components/UI/loader/Loader";
 import {useFetching} from "./hooks/useFetching";
 
 function App() {
-    const [posts, setPosts] = useState([{id: 1, title: "Higher Order Functions in javascript.", body: "description"},
-        {id: 2, title: "hat is an Immediately Invoked Function in javascript?", body: "description"},
-        {id: 3, title: "What is Currying in javascript?", body: "hello"}])
-
+    const [posts, setPosts] = useState([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
