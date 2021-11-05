@@ -24,7 +24,7 @@ function App() {
 
     console.log(pagesArray)
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
-        const response = await PostService.getAll()
+        const response = await PostService.getAll(limit,page)
         setPosts(response.data)
         const totalCount = response.headers['x-total-count']
         setTotalPages(getPagesCount(totalCount, limit))
@@ -32,7 +32,7 @@ function App() {
 
     useEffect(() => {
         fetchPosts()
-    }, [filter])
+    }, [page])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -43,6 +43,11 @@ function App() {
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     }
+
+    const changePage=(page)=>{
+        setPage(page)
+    }
+
     return (
         <div className="App">
             {/*<button onClick={fetchPosts}>GET POSTS</button>*/}
@@ -69,7 +74,7 @@ function App() {
             <div className="page__wrapper">
                 {pagesArray.map(p =>
                     <span
-                        onClick={()=>setPage(p)}
+                        onClick={()=>changePage(p)}
                         key={p}
                         className={page === p ? 'page page__current' : 'page'}>{p}</span>
                 )}
