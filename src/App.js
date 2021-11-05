@@ -31,7 +31,7 @@ function App() {
     })
 
     useEffect(() => {
-        fetchPosts()
+        fetchPosts(limit,page)
     }, [page])
 
     const createPost = (newPost) => {
@@ -46,6 +46,7 @@ function App() {
 
     const changePage=(page)=>{
         setPage(page)
+        fetchPosts(limit,page)
     }
 
     return (
