@@ -15,19 +15,19 @@ function App() {
     const [posts, setPosts] = useState([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
-    const [totalPages, setTotalPages]=useState(0)
-    const [limit, setlimit]=useState(10)
-    const [page, setPage]=useState(1)
+    const [totalPages, setTotalPages] = useState(0)
+    const [limit, setlimit] = useState(10)
+    const [page, setPage] = useState(1)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
-    let pagesArray=getPagesArray(totalPages)
+    let pagesArray = getPagesArray(totalPages)
 
     console.log(pagesArray)
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll()
         setPosts(response.data)
-        const totalCount=response.headers['x-total-count']
-        setTotalPages(getPagesCount(totalCount,limit))
+        const totalCount = response.headers['x-total-count']
+        setTotalPages(getPagesCount(totalCount, limit))
     })
 
     useEffect(() => {
@@ -66,6 +66,15 @@ function App() {
                              title="Posts List 1"
                              remove={removePost}/>
             }
+            <div className="page__wrapper">
+                {pagesArray.map(p =>
+                    <span
+                        onClick={()=>setPage(p)}
+                        key={p}
+                        className={page === p ? 'page page__current' : 'page'}>{p}</span>
+                )}
+            </div>
+
         </div>
     );
 }
