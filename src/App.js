@@ -20,6 +20,11 @@ function App() {
     const [page, setPage]=useState(1)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
+    let pagesArray=[]
+    for(let i=0;i<totalPages;i++){
+        pagesArray.push(i+1)
+    }
+    console.log(pagesArray)
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll()
         setPosts(response.data)
@@ -40,7 +45,6 @@ function App() {
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     }
-
     return (
         <div className="App">
             {/*<button onClick={fetchPosts}>GET POSTS</button>*/}
