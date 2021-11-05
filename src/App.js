@@ -14,11 +14,12 @@ function App() {
     const [posts, setPosts] = useState([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
+    const [totalCount, setTotalcount]=useState(0)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
-        const posts = await PostService.getAll()
-        setPosts(posts)
+        const response = await PostService.getAll()
+        setPosts(response.data)
     })
 
     useEffect(() => {
