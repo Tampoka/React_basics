@@ -20,6 +20,8 @@ function App() {
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll()
         setPosts(response.data)
+        console.log((response.headers['x-total-count']))
+        setTotalcount(response.headers['x-total-count'])
     })
 
     useEffect(() => {
