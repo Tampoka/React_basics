@@ -9,7 +9,7 @@ import {usePosts} from "./hooks/usePosts";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/loader/Loader";
 import {useFetching} from "./hooks/useFetching";
-import {getPagesCount} from "./utils/pages";
+import {getPagesArray, getPagesCount} from "./utils/pages";
 
 function App() {
     const [posts, setPosts] = useState([])
@@ -20,10 +20,8 @@ function App() {
     const [page, setPage]=useState(1)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
-    let pagesArray=[]
-    for(let i=0;i<totalPages;i++){
-        pagesArray.push(i+1)
-    }
+    let pagesArray=getPagesArray(totalPages)
+
     console.log(pagesArray)
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll()
