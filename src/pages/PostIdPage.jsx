@@ -21,8 +21,7 @@ const PostIdPage = () => {
             <h1>This is post page with id={params.id}</h1>
             {isLoading
                 ? <Loader/>
-                : <div>{post.id}. {post
-                }</div>
+                : <div>{post.id}.  {post.title}</div>
             }
         </div>
     );
