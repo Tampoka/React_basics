@@ -5,6 +5,7 @@
     background: transparent;
     border: 1px solid darkturquoise;
     cursor: pointer;
+    margin: 10px;
 }
 
 .myBtn:disabled {

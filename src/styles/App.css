@@ -44,6 +44,8 @@
 
 .post__btns {
     margin-left: 25px;
+
+    display: flex;
 }
 
 .page__wrapper {
