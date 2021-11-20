@@ -76,3 +76,7 @@
 .navbar__links {
     margin-left: auto;
 }
+
+.navbar__links a {
+    margin: 10px;
+}
