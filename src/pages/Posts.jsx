@@ -12,13 +12,14 @@ import Loader from "../components/UI/loader/Loader";
 import PostsList from "../components/PostsList";
 import Pagination from "../components/UI/pagination/Pagination";
 import {useObserver} from "../hooks/useObserver";
+import MySelect from "../components/UI/select/MySelect";
 
 function Posts() {
     const [posts, setPosts] = useState([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const [totalPages, setTotalPages] = useState(0)
-    const [limit, setlimit] = useState(10)
+    const [limit, setLimit] = useState(10)
     const [page, setPage] = useState(1)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
     const lastElement = useRef()
@@ -30,13 +31,13 @@ function Posts() {
         setTotalPages(getPagesCount(totalCount, limit))
     })
 
-    useObserver(lastElement,page<totalPages,isPostsLoading,()=>{
-        setPage(page+1)
+    useObserver(lastElement, page < totalPages, isPostsLoading, () => {
+        setPage(page + 1)
     })
 
     useEffect(() => {
         fetchPosts(limit, page)
-    }, [page])
+    }, [page,limit])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -65,6 +66,15 @@ function Posts() {
             <PostFilter
                 setFilter={setFilter}
                 filter={filter}/>
+            <MySelect label="Posts per page"
+                      value={limit}
+                      onChange={value => setLimit(value)}
+                      options={[
+                          {value: 5, name: '5'},
+                          {value: 10, name: '10'},
+                          {value: 25, name: '25'},
+                          {value: -1, name: 'Show all'}
+                      ]}/>
             {postError &&
             <h2>ERROR ${postError}</h2>}
             {isPostsLoading &&

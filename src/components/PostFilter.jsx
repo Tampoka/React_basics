@@ -13,7 +13,7 @@ const PostFilter = ({filter,setFilter}) => {
                 <MySelect label="Filter by"
                           value={filter.sort}
                           onChange={selectedSort=>setFilter({...filter,sort:selectedSort})}
-                          defaultValue={'Filter by'}
+                          // defaultValue={'Filter by'}
                           options={[{value: 'title', name: 'Title'},
                               {value: 'body', name: 'Description'}]}/>
             </div>
